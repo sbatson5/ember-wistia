@@ -28,7 +28,6 @@ export default Service.extend({
   },
 
   bindVideoEvent(matcher, ...rest) {
-    const arity = arguments.length;
     later(this, () => {
       const video = window.Wistia.api(matcher);
       video.bind(...rest);
