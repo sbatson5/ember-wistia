@@ -1,6 +1,6 @@
 {
   "name": "ember-wistia",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "The default blueprint for ember-cli addons.",
   "directories": {
     "doc": "doc",
@@ -39,7 +39,9 @@
     "loader.js": "^4.0.1"
   },
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "wistia",
+    "video"
   ],
   "dependencies": {
     "ember-cli-babel": "^5.1.6",
