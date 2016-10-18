@@ -5,20 +5,11 @@ moduleForComponent('wistia-video', 'Integration | Component | wistia video', {
   integration: true
 });
 
-test('it renders', function(assert) {
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+test('it has a css class prefixed with wistia_async', function(assert) {
+  assert.expect(1);
 
-  this.render(hbs`{{wistia-video}}`);
+  this.render(hbs`{{wistia-video matcher="scottIsAwesome"}}`);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#wistia-video}}
-      template block text
-    {{/wistia-video}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  const videoDiv = this.$().find('.wistia_embed:eq(0)');
+  assert.ok(videoDiv.hasClass('wistia_async_scottIsAwesome'), 'async class is added');
 });

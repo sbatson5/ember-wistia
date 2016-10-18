@@ -9,7 +9,6 @@ const {
 
 export default Service.extend({
   currentlyPlaying: null,
-  isScriptInserted: false,
 
   addVideo(matcher, userEmail = null) {
     window._wq = window._wq || [];
@@ -28,34 +27,12 @@ export default Service.extend({
     });
   },
 
-  bindVideoEvent() {
+  bindVideoEvent(matcher, ...rest) {
     const arity = arguments.length;
     later(this, () => {
-      if (arity === 3) {
-        this._bindWithTwoParams(...arguments);
-      } else if (arity === 4) {
-        this._bindWithThreeParams(...arguments)
-      } else {
-        this._bindVideoEvent(...arguments);
-      }
+      const video = window.Wistia.api(matcher);
+      video.bind(...rest);
     }, 500);
-  },
-
-  _bindVideoEvent(matcher, bindingEvent, callback) {
-    const video = window.Wistia.api(matcher);
-    video.bind(bindingEvent, callback);
-  },
-
-  _bindWithTwoParams(matcher, bindingEvent, param, callback) {
-    const video = window.Wistia.api(videoId);
-    const time = video.duration() * 0.7;
-    video.bind(bindingEvent, param, callback);
-  },
-
-  _bindWithThreeParams(matcher, bindingEvent, first_param, second_param, callback) {
-    const video = window.Wistia.api(videoId);
-    const time = video.duration() * 0.7;
-    video.bind(bindingEvent, first_param, second_param, callback);
   },
 
   clearCurrentlyPlaying(video) {
@@ -63,15 +40,6 @@ export default Service.extend({
     if (get(this, 'currentlyPlaying') === hashedId) {
       set(this, 'currentlyPlaying', null);
     }
-  },
-
-  enableScript() {
-    const isScriptInserted = get(this, 'isScriptInserted');
-    //
-    // if (!isScriptInserted) {
-    //   set(this, 'isScriptInserted', true);
-    //   injectScript('https://fast.wistia.com/assets/external/E-v1.js');
-    // }
   },
 
   getCurrentlyPlaying() {

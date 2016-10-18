@@ -22,13 +22,6 @@ export default Component.extend({
     return wistia.getCurrentlyPlaying() === get(this, 'matcher');
   }),
 
-  didInsertElement() {
-    this._super(...arguments);
-
-    const wistia = get(this, 'wistia');
-    wistia.enableScript();
-  },
-
   didRender() {
     this._super(...arguments);
     const wistia = get(this, 'wistia');
