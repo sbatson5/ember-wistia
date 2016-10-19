@@ -11,7 +11,11 @@ module.exports = {
     } else if (type === 'body'){
       return '';
     } else if (type === 'body-footer'){
-      return '<script src="https://fast.wistia.com/assets/external/E-v1.js"></script>';
+      if (config.environment === 'test') {
+        return '';
+      } else {
+        return '<script src="https://fast.wistia.com/assets/external/E-v1.js"></script>';
+      }
     }
   }
 };
