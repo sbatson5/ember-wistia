@@ -10,6 +10,6 @@ test('it has a css class prefixed with wistia_async', function(assert) {
 
   this.render(hbs`{{wistia-video matcher="scottIsAwesome"}}`);
 
-  const videoDiv = this.$().find('.wistia_embed').eq(0);
+  const videoDiv = this.$().find('.wistia_embed:eq(0)');
   assert.ok(videoDiv.hasClass('wistia_async_scottIsAwesome'), 'async class is added');
 });
