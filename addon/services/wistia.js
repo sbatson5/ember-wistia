@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 const {
   Service,
+  RSVP: { Promise },
   get,
   run: { later },
   set
@@ -43,6 +44,19 @@ export default Service.extend({
 
   getCurrentlyPlaying() {
     return get(this, 'currentlyPlaying');
+  },
+
+  getVideo(matcher) {
+    return new Promise(function(resolve, reject) {
+      later(this, () => {
+        let video = window.Wistia.api(matcher);
+        if (video) {
+          resolve(video);
+        } else {
+          reject({ msg: 'No video was found' });
+        }
+      }, 500);
+    });
   },
 
   maybeRecordEmail(video, userEmail) {

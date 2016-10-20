@@ -74,9 +74,32 @@ let matcher = '123example';
 wistia.bindVideoEvent(matcher, 'betweentimes', 30, 60, () => { console.log('hi') });
 ```
 
+### Accessing Video Properties
+The Wistia Service added in this addon also allows you to fetch the video object created by Wistia.
+This can be accessed through the `getVideo` method, which wrapped in an Ember Promise.
+For example, if you want to get a video's duration:
+
+```javascript
+// get the injected wistia service
+let wistia = get(this, 'wistia');
+
+let matcher = '123example';
+let duration;
+
+// getVideo returns a video object
+wistia.getVideo(matcher).then((video) => {
+  duration = video.duration();
+}).catch((error) => {
+  // record a message or handle errors when no video is found
+  console.log(error.msg);
+});
+```
+
+For a list of methods that can be called from a Wistia video object, visit the Wistia Player API [Documentation on Methods](https://wistia.com/doc/player-api#methods).
+
 ## Styling
 There is no styling set up by default for this component.
-However, there are a few classes you can easily leverage to style
+However, there are a few classes you can easily leverage to style.
 
 `is-playing` is a class applied to any video that is currently playing.
 This can be useful for when you have a page with multiple videos and wish to highlight the current one.

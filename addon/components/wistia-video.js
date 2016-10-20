@@ -6,14 +6,14 @@ const {
   Logger: { warn },
   computed,
   get,
-  inject
+  inject: { service }
 } = Ember;
 
 export default Component.extend({
   layout,
   matcher: null,
   email: null,
-  wistia: inject.service(),
+  wistia: service(),
   classNames: ['video-wrapper'],
   classNameBindings: ['isPlaying'],
 
@@ -22,7 +22,7 @@ export default Component.extend({
     return wistia.getCurrentlyPlaying() === get(this, 'matcher');
   }),
 
-  didRender() {
+  init() {
     this._super(...arguments);
     const wistia = get(this, 'wistia');
     const email = get(this, 'email');
