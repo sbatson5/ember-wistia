@@ -104,7 +104,7 @@ However, there are a few classes you can easily leverage to style.
 `is-playing` is a class applied to any video that is currently playing.
 This can be useful for when you have a page with multiple videos and wish to highlight the current one.
 
-`wistia-embed` is the class applied to the div wrapper for the wistia video.
+`wistia_embed` is the class applied to the div wrapper for the wistia video.
 To scale this video to its container, I recommend using this style:
 
 ```css
@@ -118,8 +118,8 @@ To scale this video to its container, I recommend using this style:
 ```
 
 This is the style used in the dummy application.
-You can see the video being run by running `ember s`.
-You can also vide examples by visiting [Society of Grownups](https://www.societyofgrownups.com/online-classes).
+You can see a video being run by running `ember s`.
+You can also view some examples by visiting [Society of Grownups](https://www.societyofgrownups.com/online-classes).
 
 ## License
 [MIT](LICENSE.md)
