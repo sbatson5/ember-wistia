@@ -81,7 +81,7 @@ For example, if you want to get a video's duration:
 
 ```javascript
 // get the injected wistia service
-let wistia = get(this, 'wistia');
+let wistia = Ember.get(this, 'wistia');
 
 let matcher = '123example';
 let duration;
@@ -96,6 +96,25 @@ wistia.getVideo(matcher).then((video) => {
 ```
 
 For a list of methods that can be called from a Wistia video object, visit the Wistia Player API [Documentation on Methods](https://wistia.com/doc/player-api#methods).
+
+Additionally, you can pass an action into the default component called `videoInitialize` that will be fired once the video has loaded.
+This method returns the `video` object as well as the `matcher` passed in, allowing you to directly fire methods on the video object.
+For example, we can define an action in our controller:
+
+```javascript
+// controller.js in your app
+actions: {
+  someAction(video, matcher) {
+    video.bind('play', () => { console.log('Action fired') });
+  }
+}
+```
+
+You can then pass that in as a closure action into the component:
+
+```handlebars
+{{wistia-video matcher="123example" videoInitialize=(action "someAction")}}
+```
 
 ## Styling
 There is no styling set up by default for this component.

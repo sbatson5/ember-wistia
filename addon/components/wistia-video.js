@@ -3,6 +3,7 @@ import layout from '../templates/components/wistia-video';
 
 const {
   Component,
+  K,
   Logger: { warn },
   computed,
   get,
@@ -16,6 +17,7 @@ export default Component.extend({
   wistia: service(),
   classNames: ['video-wrapper'],
   classNameBindings: ['isPlaying'],
+  videoInitialize: K,
 
   isPlaying: computed('matcher', function() {
     const wistia = get(this, 'wistia');
@@ -35,5 +37,15 @@ export default Component.extend({
       warn('You have not passed in a Wistia matcher');
     }
     this._super(...arguments);
+  },
+
+  didRender() {
+    const videoInitialize = get(this, 'videoInitialize');
+    const wistia = get(this, 'wistia');
+    const matcher = get(this, 'matcher');
+
+    wistia.getVideo(matcher).then((video) => {
+      videoInitialize(video, matcher);
+    });
   }
 });
