@@ -51,6 +51,7 @@ wistia.addVideo('123example', email);
 ```
 
 ### Binding Events
+*Note*: that you must use the `addVideo` method if you are not using the default component--the service will not be able to find the video otherwise.
 One of the best parts of Wistia's API is that you can bind functions to video events.
 For example, you can run a function anytime the video is paused.
 
@@ -81,7 +82,7 @@ For example, if you want to get a video's duration:
 
 ```javascript
 // get the injected wistia service
-let wistia = get(this, 'wistia');
+let wistia = Ember.get(this, 'wistia');
 
 let matcher = '123example';
 let duration;
@@ -96,6 +97,39 @@ wistia.getVideo(matcher).then((video) => {
 ```
 
 For a list of methods that can be called from a Wistia video object, visit the Wistia Player API [Documentation on Methods](https://wistia.com/doc/player-api#methods).
+
+### Building your own Wistia video component
+If you find you need more functionality than what is available out of the box, you can create your own Wistia video component.
+Rather than creating a component from scratch, it is recommended that you import the component offered by this addon and extend it.
+You can see the functionality this component offers by [clicking here](https://github.com/sbatson5/ember-wistia/blob/master/addon/components/wistia-video.js).
+If you want to bind video events, it is recommend that you do this in the `didRender` hook as Wistia will look for the matching `div`.
+If the page hasn't rendered yet, Wistia may return an error.
+Here is an example of extending the `wistia-video` component in your own app:
+
+```javascript
+import Ember from 'ember';
+import WistiaComponent from 'ember-wistia/components/wistia-video';
+
+export default WistiaComponent.extend({
+  didRender() {
+    this._super(...arguments);
+    const wistia = Ember.get(this, 'wistia');
+    const matcher = Ember.get(this, 'matcher');
+
+    wistia.getVideo(matcher).then((video) => {
+      // you now have access to the video object returned by Wistia
+      video.bind('play', () => { console.log('video is playing!') });
+      Ember.set(this, 'duration', video.duration());
+    });
+  }
+});
+```
+
+Unless you want to add additional markup, you can safely delete the `template` for this component in your app.
+
+*Note* the default component has no logic in the `didRender` hook by default, so overwriting is not a concern.
+If you want to add logic to `init` or `didReceiveAttrs`, be sure to call `this._super(...arguments)` to ensure that the component goes through its normal lifecycle.
+
 
 ## Styling
 There is no styling set up by default for this component.
