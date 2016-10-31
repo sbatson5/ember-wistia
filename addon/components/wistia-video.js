@@ -3,6 +3,7 @@ import layout from '../templates/components/wistia-video';
 
 const {
   Component,
+  Logger,
   K,
   Logger: { warn },
   computed,
@@ -46,6 +47,8 @@ export default Component.extend({
 
     wistia.getVideo(matcher).then((video) => {
       videoInitialize(video, matcher);
+    }).catch((error) => {
+      Logger.log(error.msg);
     });
   }
 });
