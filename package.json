@@ -1,7 +1,7 @@
 {
   "name": "ember-wistia",
   "version": "0.1.2",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "Simple but configurable add-on for leveraging Wistia Videos",
   "directories": {
     "doc": "doc",
     "test": "tests"
