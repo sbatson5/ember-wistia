@@ -35,7 +35,7 @@ test('#setCurrentlyPlaying updates currentlyPlaying property', function(assert) 
   };
   service.setCurrentlyPlaying(video);
 
-  assert.equal(get(service, 'currentlyPlaying'), 'abc123', 'video is set');
+  assert.equal(get(service, 'currentlyPlaying'), 'abssssc123', 'video is set');
 });
 
 test('#getVideo stubs API for testing', function(assert) {
