@@ -3,7 +3,6 @@ import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 
 const {
-  K,
   Service,
   RSVP: { Promise }
 } = Ember;
@@ -12,8 +11,8 @@ moduleForComponent('wistia-video', 'Integration | Component | wistia video', {
   integration: true,
   beforeEach() {
     const stubbedWistia = Service.extend({
-      addVideo: K,
-      getCurrentlyPlaying: K,
+      addVideo() {},
+      getCurrentlyPlaying() {},
       getVideo: function() {
         return new Promise((resolve) => {
           resolve({});
