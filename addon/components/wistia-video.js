@@ -4,7 +4,6 @@ import layout from '../templates/components/wistia-video';
 const {
   Component,
   Logger,
-  K,
   Logger: { warn },
   computed,
   get,
@@ -18,7 +17,7 @@ export default Component.extend({
   wistia: service(),
   classNames: ['video-wrapper'],
   classNameBindings: ['isPlaying'],
-  videoInitialize: K,
+  videoInitialize() {},
 
   isPlaying: computed('matcher', function() {
     const wistia = get(this, 'wistia');
