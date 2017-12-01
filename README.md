@@ -138,7 +138,7 @@ To scale this video to its container, I recommend using this style:
 
 This is the style used in the dummy application.
 You can see a video being run by running `ember s`.
-You can also view some examples by visiting [Society of Grownups](https://www.societyofgrownups.com/online-classes).
+You can also view some examples by visiting [Society of Grownups](https://www.societyofgrownups.com/courses).
 
 ## License
 [MIT](LICENSE.md)
@@ -147,7 +147,6 @@ You can also view some examples by visiting [Society of Grownups](https://www.so
 
 * `git clone` this repository
 * `npm install`
-* `bower install`
 
 ## Running Tests
 
