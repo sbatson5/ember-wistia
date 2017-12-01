@@ -11,7 +11,7 @@ ember install ember-wistia
 ```
 
 ## Example
-You can see an example of ember-wistia videos at [Society of Grownups](https://www.societyofgrownups.com/online-classes).
+You can see an example of ember-wistia videos at [Society of Grownups](https://www.societyofgrownups.com/courses).
 
 ## Usage
 Out of the box, using `ember-wistia` should be very simple.
