@@ -5,3 +5,23 @@
   top: 0;
   width: 100%;
 }
+
+.non-full-screen .video-wrapper {
+  height: 300px;
+}
+
+.non-full-screen .wistia_embed {
+  position: relative;
+}
+
+.wistia-button {
+  text-decoration: none;
+  color: #fff;
+  background-color: #26a69a;
+  text-align: center;
+ 	letter-spacing: .5px;
+	width: 50%;
+  max-width: 300px;
+  font-size: 150%;
+  height: 50px;
+}
