@@ -35,6 +35,7 @@ matrix:
     - env: EMBER_TRY_SCENARIO=ember-canary
 
 before_install:
+  - sudo chmod 4755 /opt/google/chrome/chrome-sandbox
   - npm config set spin false
   - npm install -g npm@4
   - npm --version
