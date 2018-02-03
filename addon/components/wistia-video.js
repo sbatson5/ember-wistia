@@ -7,7 +7,9 @@ const {
   Logger: { warn },
   computed,
   get,
-  inject: { service }
+  inject: { service },
+  run: { next },
+  set
 } = Ember;
 
 export default Component.extend({
@@ -17,18 +19,20 @@ export default Component.extend({
   wistia: service(),
   classNames: ['video-wrapper'],
   classNameBindings: ['isPlaying'],
+  hideVideo: false,
   videoInitialize() {},
 
   isPlaying: computed('matcher', function() {
-    const wistia = get(this, 'wistia');
+    let wistia = get(this, 'wistia');
     return wistia.getCurrentlyPlaying() === get(this, 'matcher');
   }),
 
   init() {
     this._super(...arguments);
-    const wistia = get(this, 'wistia');
-    const email = get(this, 'email');
-    const matcher = get(this, 'matcher');
+    let wistia = get(this, 'wistia');
+    let email = get(this, 'email');
+    let matcher = get(this, 'matcher');
+    set(this, 'currentMatcher', matcher);
     wistia.addVideo(matcher, email);
   },
 
@@ -39,15 +43,31 @@ export default Component.extend({
     this._super(...arguments);
   },
 
+  didUpdateAttrs() {
+    let matcher = get(this, 'matcher');
+    if (matcher !== get(this, 'currentMatcher')) {
+      this._rerenderWistiaVideo(matcher);
+    }
+    this._super(...arguments);
+  },
+
   didRender() {
-    const videoInitialize = get(this, 'videoInitialize');
-    const wistia = get(this, 'wistia');
-    const matcher = get(this, 'matcher');
+    let videoInitialize = get(this, 'videoInitialize');
+    let wistia = get(this, 'wistia');
+    let matcher = get(this, 'matcher');
 
     wistia.getVideo(matcher).then((video) => {
       videoInitialize(video, matcher);
     }).catch((error) => {
       Logger.log(error.msg);
+    });
+  },
+
+  _rerenderWistiaVideo(newMatcher) {
+    set(this, 'currentMatcher', newMatcher);
+    set(this, 'hideVideo', true);
+    next(() => {
+      set(this, 'hideVideo', false);
     });
   }
 });
