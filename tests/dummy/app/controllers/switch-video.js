@@ -1,6 +1,5 @@
-import Ember from 'ember';
-
-const { Controller, get, set } = Ember;
+import Controller from '@ember/controller';
+import { get, set } from '@ember/object';
 
 export default Controller.extend({
   originalMatcher: 'ndf5tllia5',

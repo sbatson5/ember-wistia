@@ -1,16 +1,12 @@
 import Ember from 'ember';
+import Component from '@ember/component';
+import { computed, get, set } from '@ember/object';
+import { inject as service } from '@ember/service';
+import { next } from '@ember/runloop';
+import { assert } from '@ember/debug';
 import layout from '../templates/components/wistia-video';
 
-const {
-  Component,
-  Logger,
-  Logger: { warn },
-  computed,
-  get,
-  inject: { service },
-  run: { next },
-  set
-} = Ember;
+const { Logger, } = Ember;
 
 export default Component.extend({
   layout,
@@ -37,9 +33,7 @@ export default Component.extend({
   },
 
   didReceiveAttrs() {
-    if (!get(this, 'matcher')) {
-      warn('You have not passed in a Wistia matcher');
-    }
+    assert('You have not passed in a Wistia matcher', get(this, 'matcher'));
     this._super(...arguments);
   },
 

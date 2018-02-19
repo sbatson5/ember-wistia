@@ -1,13 +1,10 @@
 import Ember from 'ember';
+import Service from '@ember/service';
+import { Promise } from 'rsvp';
+import { get, set } from '@ember/object';
+import { later } from '@ember/runloop';
 
-const {
-  Logger,
-  Service,
-  RSVP: { Promise },
-  get,
-  run: { later },
-  set
-} = Ember;
+const { Logger } = Ember;
 
 export default Service.extend({
   currentlyPlaying: null,
@@ -32,13 +29,13 @@ export default Service.extend({
   bindVideoEvent(matcher, ...rest) {
     let Wistia = this._wistiaApi();
     later(this, () => {
-      const video = Wistia.api(matcher);
+      let video = Wistia.api(matcher);
       video.bind(...rest);
     }, 500);
   },
 
   clearCurrentlyPlaying(video) {
-    const hashedId = video.hashedId();
+    let hashedId = video.hashedId();
     if (get(this, 'currentlyPlaying') === hashedId) {
       set(this, 'currentlyPlaying', null);
     }
@@ -69,7 +66,7 @@ export default Service.extend({
   },
 
   _setAutoPausing(current) {
-    const allVideos = window.Wistia.api.all();
+    let allVideos = window.Wistia.api.all();
     allVideos.forEach((video) => {
       if (video.hashedId() !== current.hashedId()) {
         video.pause();
@@ -78,7 +75,7 @@ export default Service.extend({
   },
 
   setCurrentlyPlaying(video) {
-    const hashedId = video.hashedId();
+    let hashedId = video.hashedId();
     set(this, 'currentlyPlaying', hashedId);
   },
 
