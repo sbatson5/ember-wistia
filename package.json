@@ -1,6 +1,6 @@
 {
   "name": "ember-wistia",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Easy use components for wistia videos in an ember project",
   "keywords": [
     "ember-addon"
