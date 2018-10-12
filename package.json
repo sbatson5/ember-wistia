@@ -11,11 +11,12 @@
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "sbatson5/ember-wistia",
   "scripts": {
     "build": "ember build",
+    "lint:js": "eslint .",
     "start": "ember serve",
-    "test": "ember try:each"
+    "test": "ember test",
+    "test:all": "ember try:each"
   },
   "dependencies": {
     "ember-cli-babel": "^6.6.0",
@@ -38,13 +39,13 @@
     "ember-maybe-import-regenerator": "^0.1.6",
     "ember-resolver": "^4.0.0",
     "ember-sinon": "^1.0.1",
+    "ember-source": "~3.3.0",
     "ember-source-channel-url": "^1.0.1",
     "ember-try": "^0.2.23",
     "eslint-plugin-ember": "^5.0.0",
-    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-node": "^6.0.1",
     "loader.js": "^4.2.3",
-    "qunit-dom": "^0.7.1",
-    "bower": "^1.8.2"
+    "qunit-dom": "^0.6.2"
   },
   "engines": {
     "node": "6.* || 8.* || >= 10.*"
