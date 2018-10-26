@@ -11,6 +11,7 @@
     "doc": "doc",
     "test": "tests"
   },
+  "repository": "github:sbatson5/ember-wistia",
   "scripts": {
     "build": "ember build",
     "lint:js": "eslint .",
