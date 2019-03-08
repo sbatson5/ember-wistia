@@ -5,6 +5,7 @@ import Service from '@ember/service';
 import { Promise } from 'rsvp';
 import hbs from 'htmlbars-inline-precompile';
 import wait from 'ember-test-helpers/wait';
+import { VERSION } from '@ember/version';
 
 module('Integration | Component | wistia-video', function(hooks) {
   setupRenderingTest(hooks);
@@ -55,28 +56,30 @@ module('Integration | Component | wistia-video', function(hooks) {
     });
   });
 
-  test('`videoInitialize` method is fired once component renders for angle bracket', async function(assert) {
-    assert.expect(1);
+  if (parseFloat(VERSION) >= 3.5) {
+    test('`videoInitialize` method is fired once component renders for angle bracket', async function(assert) {
+      assert.expect(1);
 
-    this.set('videoInitialize', () => {
-      assert.ok(true, 'initialize function is called');
+      this.set('videoInitialize', () => {
+        assert.ok(true, 'initialize function is called');
+      });
+
+      await render(hbs`<WistiaVideo @matcher="scottIsAwesome" @videoInitialize={{videoInitialize}} />`);
     });
 
-    await render(hbs`<WistiaVideo @matcher="scottIsAwesome" @videoInitialize={{videoInitialize}} />`);
-  });
+    test('updating the `matcher` will rerender the wistia div  for angle bracket', async function(assert) {
+      assert.expect(4);
+      this.set('matcher', 'abc123');
 
-  test('updating the `matcher` will rerender the wistia div  for angle bracket', async function(assert) {
-    assert.expect(4);
-    this.set('matcher', 'abc123');
+      await render(hbs`<WistiaVideo @matcher={{matcher}} />`);
+      assert.dom('.wistia_embed').exists();
+      assert.dom('.wistia_embed').hasClass('wistia_async_abc123');
 
-    await render(hbs`<WistiaVideo @matcher={{matcher}} />`);
-    assert.dom('.wistia_embed').exists();
-    assert.dom('.wistia_embed').hasClass('wistia_async_abc123');
-
-    this.set('matcher', 'newvideo');
-    assert.dom('.wistia_embed').doesNotExist();
-    return wait().then(() => {
-      assert.dom('.wistia_embed').hasClass('wistia_async_newvideo', 'async class is added');
+      this.set('matcher', 'newvideo');
+      assert.dom('.wistia_embed').doesNotExist();
+      return wait().then(() => {
+        assert.dom('.wistia_embed').hasClass('wistia_async_newvideo', 'async class is added');
+      });
     });
-  });
+  }
 });
