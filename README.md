@@ -19,12 +19,16 @@ Simply use the `wistia-video` component, passing a Wistia `matcher`.
 A `matcher` can be found at the end of the URL for your video--it is typically a 10 character alphanumeric code.
 
 ```handlebars
+<WistiaVideo @matcher="123example" />
+or
 {{wistia-video matcher="123example"}}
 ```
 
 If you want to leverage Wistia's tracking and log which user is viewing your content, you can pass in an email as well.
 
 ```handlebars
+<WistiaVideo @matcher="123example" @email="test@example.com" />
+or
 {{wistia-video matcher="123example" email="test@example.com"}}
 ```
 
@@ -113,6 +117,8 @@ actions: {
 You can then pass that in as a closure action into the component:
 
 ```handlebars
+<WistiaVideo @matcher="123example" @videoInitialize={{action "someAction"}} />
+or
 {{wistia-video matcher="123example" videoInitialize=(action "someAction")}}
 ```
 
